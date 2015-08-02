@@ -22,6 +22,25 @@ users = User.all
 end
 wikis = Wiki.all
 
+# Create my own admin account
+sean = User.new(
+  name:     'Sean',
+  email:    'sean@example.com',
+  password: 'password',
+  role:     'admin'
+  )
+sean.skip_confirmation!
+sean.save!
+
+#Create Member
+ member = User.new(
+  name: 'Member',
+  email: 'member@example.com',
+  password: 'password'
+ )
+ member.skip_confirmation!
+ member.save!
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
