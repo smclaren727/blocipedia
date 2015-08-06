@@ -1,11 +1,9 @@
- class WikiPolicy < ApplicationPolicy
-
+class WikiPolicy < ApplicationPolicy
   def index?
     true
   end
 
-	def show?
-		record.private == false || ((record.private == true && record.user == user) || user.admin? if user) || record.users.include?(user)
-	end
-
- end
+  def show?
+    (user.present? && ((user.role == 'premium') || (user.role == 'admin'))) || record.private != true
+  end
+end

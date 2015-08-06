@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-		user.present?    
+    user.present?
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-		update? 
+    user.present? && user.admin?
   end
 
   def scope

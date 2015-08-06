@@ -1,17 +1,20 @@
 class UsersController < ApplicationController
-	def index
-		@users = User.all
-	end
+  def downgrade 
+    current_user.update_attribute(:role, 'standard')
+    
+    current_user.wikis.each do |wiki|
+      wiki.update_attribute(:private, false)
+    end
+    redirect_to root_path
+  end
 
-	def show
-		@user = User.find(params[:id])
-	end
+  private
 
-	def downgrade
-		@user = User.find(params[:id])
+  def user_params
+    params.require(:user).permit(:name, :role)
+  end
 
-		@user.downgrade_to_standard_and_save
-
-		redirect_to edit_user_registration_path
-	end
+  def wiki_params(wiki)
+    params.require(:wiki).permit(:private)
+  end  
 end
