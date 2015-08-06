@@ -1,0 +1,6 @@
+<h1><%= @user.name %></h1>
+<p><strong>Email: </strong><%= @user.email %></p>
+<p><strong>Account Type: </strong><%= @user.role%></p>
+<%= link_to "Upgrade Account", new_charge_path, class: "btn btn-success" %>
+<%= link_to "Downgrade Account", charge_path(current_user), data: { confirm: "Downgrading your account will convert your private wikis to public." }, class: "btn btn-danger", method: :patch %>
+

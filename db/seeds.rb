@@ -10,17 +10,15 @@ require 'faker'
   user.skip_confirmation!
   user.save!
 end
-users = User.all
 
-# Create Wikis
-20.times do
-  wiki = Wiki.create!(
-    user:   users.sample,
-    title:  Faker::Lorem.sentence,
-    body:   Faker::Lorem.paragraph
-    )
-end
-wikis = Wiki.all
+#Create Member
+ member = User.new(
+  name: 'Member',
+  email: 'member@example.com',
+  password: 'password'
+ )
+ member.skip_confirmation!
+ member.save!
 
 # Create my own admin account
 sean = User.new(
@@ -32,14 +30,17 @@ sean = User.new(
 sean.skip_confirmation!
 sean.save!
 
-#Create Member
- member = User.new(
-  name: 'Member',
-  email: 'member@example.com',
-  password: 'password'
- )
- member.skip_confirmation!
- member.save!
+users = User.all
+
+# Create Wikis
+20.times do
+  wiki = Wiki.create!(
+    user:   users.sample,
+    title:  Faker::Lorem.sentence,
+    body:   Faker::Lorem.paragraph
+    )
+end
+wikis = Wiki.all
 
 puts "Seed finished"
 puts "#{User.count} users created"

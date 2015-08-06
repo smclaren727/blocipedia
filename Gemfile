@@ -13,6 +13,7 @@ gem 'devise', '~> 3.5.1'
 gem 'figaro', '~> 1.1.1'
 gem 'faker', '~> 1.4.3'
 gem 'pundit', '~> 1.0.1'
+gem 'stripe', '~> 1.23.0'
 
 group :development, :test do
   gem 'byebug'
