@@ -2,7 +2,7 @@
  
    <%= render partial: 'form', locals: { wiki: @wiki } %>
 
-<% if current_user.role == 'premium' %>
+<% if current_user.premium? || current_user.admin? %>
 <h3>Manage Collaborators</h3>
 
 <table class = 'table'>

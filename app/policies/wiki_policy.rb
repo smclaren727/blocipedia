@@ -25,18 +25,19 @@ class WikiPolicy < ApplicationPolicy
 
     # scope = Wiki
     def resolve
+			return scope.where(private: false) unless user
     
       # if the user is an admin, show them all the wikis
-      if user.role == 'admin'
+      if user.admin?
         scope.all
       
-      elsif user.role == 'premium'
+      elsif user.premium?
       
         # if the user is premium, only show them public wikis, 
         # or that private wikis they created, 
         # or private wikis they are a collaborator on
       
-        scope.eager_load(:collaborators).where("wikis.private = ? OR wikis.user_id = ? OR collaborators.user_id = ?", user.id, false, user.id)
+        scope.eager_load(:collaborators).where("wikis.private = ? OR wikis.user_id = ? OR collaborators.user_id = ?", false, user.id,  user.id)
       
       else # this is the lowly standard user
       
